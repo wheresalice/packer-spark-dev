@@ -4,7 +4,7 @@ Packer/Ansible build for creating a development environment with Spark, R and Py
 
 ## Docker
 
-`packer.io build -only=docker spark.json`
+`packer.io build -only=docker docker.json`
 
 This will create a docker image you can use
 
@@ -12,7 +12,7 @@ This will create a docker image you can use
 
 You'll need to run vagrant up and probably change the source_path in the json config before you can run this.
 
-`packer.io build -only=virtualbox-ovf spark.json`
+`packer.io build -only=virtualbox-ovf virtualbox.json`
 
 This will actually build a Vagrant image for you to use.
 
