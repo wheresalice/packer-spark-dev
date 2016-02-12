@@ -1,0 +1,30 @@
+{
+  "builders": [
+    {
+      "type": "virtualbox-ovf",
+      "source_path": "/home/kaerasta/.vagrant.d/boxes/centos-VAGRANTSLASH-7/1601.01/virtualbox/box.ovf",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "headless": true,
+      "shutdown_command": "echo 'packer' | sudo -S shutdown -P now"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo yum install -y python-setuptools gcc python-devel && yum clean all",
+        "sudo easy_install pip",
+        "sudo pip install ansible"
+      ]
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "ansible/local.yml",
+      "playbook_dir": "ansible"
+    }
+  ],
+  "post-processors": [
+    "vagrant"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "builders": [
+    {
+      "type": "docker",
+      "image": "ansible/centos7-ansible",
+      "commit": true
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "yum install -y sudo && yum clean all"
+      ]
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "ansible/local.yml",
+      "playbook_dir": "ansible"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "docker-tag",
+      "repository": "kaerast/sparkr"
+    }
+  ]
+}

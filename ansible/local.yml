@@ -1,0 +1,21 @@
+---
+- hosts: all
+  sudo: yes
+  tasks:
+    # scala
+    - get_url: url=http://downloads.typesafe.com/scala/2.11.7/scala-2.11.7.rpm dest=/tmp/scala-2.11.7.rpm
+    - yum: name=/tmp/scala-2.11.7.rpm state=installed
+    # sbt
+    - copy: src=bintray-sbt-rpm.repo dest=/etc/yum.repos.d/bintray-sbt-rpm.repo
+    - yum: pkg=sbt state=installed
+
+    # Spark stuff
+    - get_url:    url=http://www.mirrorservice.org/sites/ftp.apache.org/spark/spark-1.5.1/spark-1.5.1-bin-hadoop2.6.tgz  dest=/opt/spark-1.5.1-bin-hadoop2.6.tgz  sha256sum=41ab59b28581b7952e3b0cfd8182980f033d2bf22d0f6a088ee6d120ddf24953
+    - unarchive: copy=no src=/opt/spark-1.5.1-bin-hadoop2.6.tgz dest=/opt creates=/opt/spark-1.5.1-bin-hadoop2.6/README.md
+    - lineinfile: create=yes state=present line="export PATH=$PATH:/opt/spark-1.5.1-bin-hadoop2.6/bin" dest=/etc/profile.d/spark.sh
+    # R
+    - get_url: url=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm dest=/tmp/epel.rpm
+    - yum: pkg=/tmp/epel.rpm state=installed
+    - yum: pkg=R state=installed
+
+    - shell: yum clean all

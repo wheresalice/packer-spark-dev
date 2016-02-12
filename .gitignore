@@ -1,0 +1,5 @@
+.idea
+.vagrant
+*.box
+packer_cache
+build.*
