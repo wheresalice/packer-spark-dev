@@ -19,3 +19,4 @@ This will actually build a Vagrant image for you to use.
 ## TODO
 
 - Add impala drivers
+- Merge docker and virtualbox packer configs
