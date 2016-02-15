@@ -10,7 +10,7 @@ This will create a docker image you can use
 
 ## Vagrant
 
-You'll need to run vagrant up and probably change the source_path in the json config before you can run this.
+You'll need to run load_virtualbox.rb to download the box and update the packer config file before you can use this.  The included Vagrantfile points to the same box, so you can also vagrant up and then manually change the config files if you prefer.
 
 `packer.io build -only=virtualbox-ovf virtualbox.json`
 
